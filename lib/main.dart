@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import './widgets/sign_in_screen.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,94 +11,52 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Color Slider Demo',
-      theme: ThemeData(primarySwatch: Colors.purple),
-      home: const ColorPickerPage(),
-    );
-  }
-}
+      title: "Flutter Demo",
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: false,
 
-class ColorPickerPage extends StatefulWidget {
-  const ColorPickerPage({super.key});
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: const Color(0xFFF2F2F2),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(4),
+            borderSide: const BorderSide(color: Colors.grey),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blue, width: 2),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+        ),
 
-  @override
-  State<ColorPickerPage> createState() => _ColorPickerPageState();
-}
 
-class _ColorPickerPageState extends State<ColorPickerPage> {
-  double red = 44;
-  double green = 178;
-  double blue = 230;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter Demo Home Page'),
-        backgroundColor: Colors.purple[200],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 150,
-              height: 150,
-              color: Color.fromRGBO(
-                red.toInt(),
-                green.toInt(),
-                blue.toInt(),
-                1,
-              ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size.fromHeight(48),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
-            const SizedBox(height: 32),
+          ),
+        ),
 
-
-            buildColorSlider(
-              label: "Red",
-              value: red,
-              onChanged: (value) => setState(() => red = value),
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            minimumSize: const Size.fromHeight(48),
+            side: const BorderSide(color: Colors.black12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
             ),
+          ),
+        ),
 
-            buildColorSlider(
-              label: "Green",
-              value: green,
-              onChanged: (value) => setState(() => green = value),
-            ),
-
-            buildColorSlider(
-              label: "Blue",
-              value: blue,
-              onChanged: (value) => setState(() => blue = value),
-            ),
-          ],
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-    );
-  }
-
-  Widget buildColorSlider({
-    required String label,
-    required double value,
-    required Function(double) onChanged,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "$label: ${value.toInt()}",
-          style: const TextStyle(fontWeight: FontWeight.bold),
-        ),
-        Slider(
-          min: 0,
-          max: 255,
-          value: value,
-          onChanged: onChanged,
-        ),
-        const SizedBox(height: 8),
-      ],
+      home: const SignInScreen(),
     );
   }
 }
