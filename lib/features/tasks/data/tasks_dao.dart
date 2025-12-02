@@ -15,13 +15,4 @@ class TasksDao {
     final result = await db.query('tasks', orderBy: 'date DESC');
     return result.map((json) => TaskModel.fromMap(json)).toList();
   }
-
-  Future<int> deleteTask(int id) async {
-    final db = await _db;
-    return await db.delete(
-      'tasks',
-      where: 'id = ?',
-      whereArgs: [id],
-    );
-  }
 }
